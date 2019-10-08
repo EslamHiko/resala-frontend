@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 
-const Header = () => (
+const Header = (props) => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
      <div className="container">
        <Link href="/"><a className="navbar-brand">ClassifyIt</a></Link>
@@ -13,15 +13,18 @@ const Header = () => (
            <li className="nav-item dropdown">
              <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Manage <span className="caret"></span></a>
              <div className="dropdown-menu" aria-labelledby="download">
-               <Link href="/login"><a className="dropdown-item">Login</a></Link>
-               <div className="dropdown-divider"></div>
-                <Link href="/categories"><a className="dropdown-item">Categories</a></Link>
-                <Link href="/users"><a className="dropdown-item">Admins</a></Link>
-               <Link href="/lists"><a className="dropdown-item">word lists</a></Link>
-               <Link href="/posts"><a className="dropdown-item">saved posts</a></Link>
+             {!props.user._id &&  <Link href="/login"><a className="dropdown-item">Login</a></Link>}
+             {props.user._id && props.user.role == 'admin' &&
+             [
+              <Link href="/categories"><a className="dropdown-item">Categories</a></Link>,
+              <Link href="/users"><a className="dropdown-item">Admins</a></Link>,
+             <Link href="/lists"><a className="dropdown-item">Word Lists</a></Link>,
+             <Link href="/posts"><a className="dropdown-item">Saved Posts</a></Link>
+              ]}
 
-               <div className="dropdown-divider"></div>
-               <Link href="/logout"><a className="dropdown-item">Log out</a></Link>
+
+
+              {props.user._id && <Link href="/logout"><a className="dropdown-item">Log out</a></Link>}
              </div>
            </li>
          </ul>

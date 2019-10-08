@@ -2,13 +2,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/custom.css'
 import Header from './header'
 import Footer from './footer'
-export default function Layout(props) {
+import React from 'react'
+class Layout extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = {user:{}}
+  }
+  async componentDidMount(){
+    const axios = require('../utils/axios')
+    await axios.get('https://localhost:8080/user').then(e=>{
+      if(e.data){
+        console.log(e.data)
+        this.setState({user:e.data.data})
+      }
+    }).catch(e=>console.log(e));
+  }
+  render(){
+  
+
   return (
 [
 
-    <Header />,
-    <div className="container">
-      {props.children}
+    <Header user={this.state.user}/>,
+    <div className="container" >
+      {this.props.children}
       {/*<Footer />*/}
     </div>,
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -26,3 +44,6 @@ export default function Layout(props) {
 
   );
 }
+}
+
+export default Layout

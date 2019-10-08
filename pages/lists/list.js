@@ -32,6 +32,19 @@ class Index extends React.Component {
           console.log(this.state.post)
         })
       }
+      var newPost = localStorage.getItem('list');
+
+      if(newPost){
+        localStorage.removeItem('list')
+        newPost = JSON.parse(newPost);
+        newPost.category = newPost.possibleBadges[0][0];
+        console.log(newPost.possibleBadges)
+        newPost.text = newPost.message;
+        console.log(newPost)
+        this.setState({post:newPost})
+      }
+
+
     })
 
   }
@@ -83,7 +96,7 @@ class Index extends React.Component {
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">category</label>
-    <select onChange={this.handleChange} required name="category" value={this.state.post.color } class="form-control" id="exampleFormControlSelect1">
+    <select onChange={this.handleChange} required name="category" value={this.state.post.category } class="form-control" id="exampleFormControlSelect1">
     {cats.length && cats.map(cat=> <option  value={cat.name} className={`badge-${cat.color}`}>{cat.name}</option>) }
     </select>
   </div>

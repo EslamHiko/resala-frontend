@@ -10,6 +10,7 @@ class Index extends React.Component {
     super(props)
     this.state = {cats:[{name:"كل المنشورات"}],posts:[],postsToShow:[],loading:'Loading'}
     this.filterPosts = this.filterPosts.bind(this)
+    this.loadPosts = this.loadPosts.bind(this)
   }
   filterPosts(e){
     const posts = this.state.posts;
@@ -22,45 +23,59 @@ class Index extends React.Component {
     });
     this.setState({postsToShow:postsToShow});
   }
-  async componentDidMount(){
+  async loadPosts(){
     const axios = require('../utils/axios')
 
+    await axios.get('https://localhost:8080/'+(this.state.next?'?next='+encodeURIComponent(this.state.next):'')).then(res=>{
+        var posts = res.data.posts;
+        posts = posts.map(post=>{
+          console.log(post)
+          const possibleBadges = [];
+          if(post.scores[0][Object.keys(post.scores[0])[0]]){
+            possibleBadges.push([Object.keys(post.scores[0])[0]]);
+          } else {
+            possibleBadges.push("غير معروف");
+          }
 
+          for(let i = 1; i < post.scores.length;i++){
+            let val = post.scores[i-1][Object.keys(post.scores[i-1])[0]];
+            let curr = post.scores[i][Object.keys(post.scores[i])[0]];
+            if((curr == val || curr == val - 1) && curr){
+              possibleBadges.push(Object.keys(post.scores[i])[0]);
+            } else {
+              break;
+            }
+          }
+          post.possibleBadges = possibleBadges;
+          return post;
+        });
+        const allPosts = [...this.state.posts,...posts];
 
-await axios.get('https://localhost:8080/cats').then(res=>{
+        this.setState({posts:allPosts,postsToShow:allPosts,next:res.data.next,loading:"No Posts"});
+      }).catch(e=>{
+        console.log(e)
+      });
+  }
+  async componentDidMount(){
+
+    const axios = require('../utils/axios')
+
+    await axios.get('https://localhost:8080/user').then(e=>{
+      if(e.data){
+        console.log(e.data)
+        this.setState({user:e.data.data})
+      }
+    }).catch(e=>console.log(e));
+
+await axios.get('https://localhost:8080/cats').then(async res=>{
     const cats = [...this.state.cats,...res.data];
     this.setState({cats:cats});
+    await this.loadPosts()
   }).catch(e=>{
     console.log(e)
   });
-  await axios.get('https://localhost:8080/').then(res=>{
-      var posts = res.data.posts;
-      posts = posts.map(post=>{
-        console.log(post)
-        const possibleBadges = [];
-        if(post.scores[0][Object.keys(post.scores[0])[0]]){
-          possibleBadges.push([Object.keys(post.scores[0])[0]]);
-        } else {
-          possibleBadges.push("غير معروف");
-        }
 
-        for(let i = 1; i < post.scores.length;i++){
-          let val = post.scores[i-1][Object.keys(post.scores[i-1])[0]];
-          let curr = post.scores[i][Object.keys(post.scores[i])[0]];
-          if((curr == val || curr == val - 1) && curr){
-            possibleBadges.push(Object.keys(post.scores[i])[0]);
-          } else {
-            break;
-          }
-        }
-        post.possibleBadges = possibleBadges;
-        return post;
-      });
-      console.log(posts)
-      this.setState({posts:posts,postsToShow:posts,next:res.data.next,loading:"No Posts"});
-    }).catch(e=>{
-      console.log(e)
-    });
+
 
   }
   render(){
@@ -88,8 +103,12 @@ await axios.get('https://localhost:8080/cats').then(res=>{
           </div>
           <div className="container">
           <div className="row margin-top">
-          {(this.state.postsToShow.length && this.state.postsToShow.map(post=><Post post={post} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
+          {(this.state.postsToShow.length && this.state.postsToShow.map(post=><Post post={post} user={this.state.user} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
 
+
+</div>
+<div className="text-center">
+{(this.state.next && this.state.loading != 'Loading' && <a href="#" onClick={this.loadPosts} className="btn btn-md btn-success">Load More</a>)}
 </div>
       </div>
         </main>

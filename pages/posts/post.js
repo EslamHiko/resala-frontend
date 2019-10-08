@@ -22,6 +22,7 @@ class Index extends React.Component {
 
     var url = new URL(window.location.href);
     var id = url.searchParams.get("id");
+  
     axios.get('https://localhost:8080/cats/').then(e=>{
 
       this.setState({categories:e.data})
@@ -32,6 +33,18 @@ class Index extends React.Component {
           console.log(this.state.post)
         })
       }
+
+      var newPost = localStorage.getItem('post');
+      console.log(newPost)
+      if(newPost){
+        localStorage.removeItem('post')
+        newPost = JSON.parse(newPost);
+        newPost.category = newPost.possibleBadges[0][0];
+        newPost.text = newPost.message;
+        this.setState({post:newPost})
+      }
+
+
     })
 
   }
@@ -99,7 +112,7 @@ class Index extends React.Component {
 </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">category</label>
-    <select onChange={this.handleChange} required name="category" value={this.state.post.color } class="form-control" id="exampleFormControlSelect1">
+    <select onChange={this.handleChange} required name="category" value={this.state.post.category } class="form-control" id="exampleFormControlSelect1">
     {cats.length && cats.map(cat=> <option  value={cat.name} className={`badge-${cat.color}`}>{cat.name}</option>) }
     </select>
   </div>
