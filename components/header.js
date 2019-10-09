@@ -19,6 +19,9 @@ const Header = (props) => (
              <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Manage <span className="caret"></span></a>
              <div className="dropdown-menu" aria-labelledby="download">
              {!props.user._id &&  <Link href="/login"><a className="dropdown-item">Login</a></Link>}
+             {!props.user._id &&  <Link href="/register"><a className="dropdown-item">Register</a></Link>}
+             {props.user._id &&  <Link href="/edit"><a className="dropdown-item">Edit</a></Link>}
+
              {props.user._id && props.user.sadmin && <Link  href="/users"><a className="dropdown-item">Users / Admins</a></Link>}
              {props.user._id && props.user.role == 'admin' &&
              [

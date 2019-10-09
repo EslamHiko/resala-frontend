@@ -8,7 +8,7 @@ class Index extends React.Component {
   constructor(props){
     super(props)
     this.navigate = this.navigate.bind(this);
-    this.state = {user: {}}
+    this.state = {user: {},newAccount:true}
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange  = this.handleChange.bind(this)
   }
@@ -31,7 +31,8 @@ class Index extends React.Component {
         Object.keys(profile).forEach(key=>{
           user[key] = profile[key];
         });
-        this.setState({user:user})
+        user.password = '';
+        this.setState({user:user,newAccount:false})
         console.log(this.state.user)
       })
     }
@@ -89,11 +90,11 @@ class Index extends React.Component {
       </div>
       <div className="form-group">
         <label for="password">password</label>
-        <input onChange={this.handleChange} required type="password" name="password" value={this.state.user.password} className="form-control" id="password" placeholder="password" />
+        <input onChange={this.handleChange} required={this.state.newAccount} type="password" name="password" value={this.state.user.password} className="form-control" id="password" placeholder="password" />
       </div>
       <div className="form-group">
         <label for="password2">password</label>
-        <input onChange={this.handleChange} required type="password" name="password2" value={this.state.user.password2} className="form-control" id="password2" placeholder="password confirmation" />
+        <input onChange={this.handleChange} required={this.state.newAccount} type="password" name="password2" value={this.state.user.password2} className="form-control" id="password2" placeholder="password confirmation" />
       </div>
       <div className="form-group">
         <label for="location">location</label>

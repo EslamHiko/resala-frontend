@@ -70,7 +70,7 @@ console.log(colorMap)
       </tr>
     </thead>
     <tbody>
-    {this.state.cats.map(cat => <tr>
+    {this.state.cats.map((cat,i) => <tr key={i}>
       <td>{cat.name}</td>
       <td><a href="#" className={`badge badge-${cat.color}`}>{colorMap[cat.color] || 'White'}</a></td>
       <td><Link href={'/categories/cat?id='+cat._id}  cat={cat}><a className="btn btn-sm btn-warning">edit</a></Link><a className="btn btn-sm btn-danger" onClick={this.removeCat} href="#" name={cat.name} cat={cat._id}>remove</a></td>
