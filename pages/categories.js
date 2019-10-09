@@ -50,8 +50,8 @@ console.log(colorMap)
       <main role="main" className="mb-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
               <h1 className="h2">Categories</h1>
-              <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
+              <div className="btn-toolbar mb-2 mb-md-0">
+            <div className="btn-group mr-2">
               <button type="button" onClick={this.navigate} path="/categories/cat" className="btn btn-sm btn-outline-secondary">+ New Category</button>
             </div>
 

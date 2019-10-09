@@ -25,14 +25,8 @@ class Index extends React.Component {
     const token = localStorage.getItem('token')
     if(token)
       return Router.push('/')
-
-
   }
   render(){
-
-
-
-
     return (
     <Layout>
 

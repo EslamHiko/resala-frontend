@@ -1,8 +1,13 @@
 import Link from 'next/link';
+import Head from 'next/head'
 
 
 const Header = (props) => (
+
   <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <Head>
+      <title>ClassifyIt</title>
+    </Head>
      <div className="container">
        <Link href="/"><a className="navbar-brand">ClassifyIt</a></Link>
        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,14 +21,11 @@ const Header = (props) => (
              {!props.user._id &&  <Link href="/login"><a className="dropdown-item">Login</a></Link>}
              {props.user._id && props.user.role == 'admin' &&
              [
-              <Link href="/categories"><a className="dropdown-item">Categories</a></Link>,
-              <Link href="/users"><a className="dropdown-item">Admins</a></Link>,
-             <Link href="/lists"><a className="dropdown-item">Word Lists</a></Link>,
-             <Link href="/posts"><a className="dropdown-item">Saved Posts</a></Link>
+              <Link  key={0} href="/categories"><a className="dropdown-item">Categories</a></Link>,
+              <Link  key={1} href="/users"><a className="dropdown-item">Admins</a></Link>,
+             <Link  key={2} href="/lists"><a className="dropdown-item">Word Lists</a></Link>,
+             <Link  key={3} href="/posts"><a className="dropdown-item">Saved Posts</a></Link>
               ]}
-
-
-
               {props.user._id && <Link href="/logout"><a className="dropdown-item">Log out</a></Link>}
              </div>
            </li>

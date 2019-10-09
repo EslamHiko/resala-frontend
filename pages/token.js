@@ -23,19 +23,13 @@ class Index extends React.Component {
   render(){
     return (
       <Layout>
-
-      <main role="main" className="container">
-
-
+        <main role="main" className="container">
             <div className="container">
-
-  <div className="text-center">
-  <a href="#"  className="btn btn-md btn-grey">Signing In</a>
-  </div>
-      </div>
-          </main>
-
-
+              <div className="text-center">
+                <a href="#"  className="btn btn-md btn-grey">Signing In</a>
+              </div>
+            </div>
+        </main>
       </Layout>
     );
   }

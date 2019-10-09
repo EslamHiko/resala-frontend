@@ -75,47 +75,26 @@ await axios.get('https://localhost:8080/cats').then(async res=>{
     console.log(e)
   });
 
-
-
   }
   render(){
-
-
-
-
-
-
-
-
-
-
     return (
     <Layout>
-
-
-
-    <main role="main" className="container">
-          <div className="bg-light rounded-pill">
-          <div className="container">
-          {(this.state.cats.length &&
-            this.state.cats.map(cat => <a href="#" onClick={this.filterPosts} name={cat.name} className={`badge badge-${cat.color}`}>{cat.name}</a>)) || <div className="text-center">{this.state.loading}</div>}
-  </div>
-          </div>
-          <div className="container">
-          <div className="row margin-top">
-          {(this.state.postsToShow.length && this.state.postsToShow.map(post=><Post post={post} user={this.state.user} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
-
-
-</div>
-<div className="text-center">
-{(this.state.next && this.state.loading != 'Loading' && <a href="#" onClick={this.loadPosts} className="btn btn-md btn-success">Load More</a>)}
-</div>
-      </div>
-        </main>
-
-
-
-
+      <main role="main" className="container">
+            <div className="bg-light rounded-pill">
+            <div className="container">
+            {(this.state.cats.length &&
+              this.state.cats.map((cat,i) => <a href="#" key={i} onClick={this.filterPosts} name={cat.name} className={`badge badge-${cat.color}`}>{cat.name}</a>)) || <div className="text-center">{this.state.loading}</div>}
+              </div>
+            </div>
+            <div className="container">
+            <div className="row margin-top">
+              {(this.state.postsToShow.length && this.state.postsToShow.map((post,i)=><Post key={i} post={post} user={this.state.user} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
+            </div>
+            <div className="text-center">
+              {(this.state.next && this.state.loading != 'Loading' && <a href="#" onClick={this.loadPosts} className="btn btn-md btn-success">Load More</a>)}
+            </div>
+        </div>
+      </main>
     </Layout>
   );}
 }

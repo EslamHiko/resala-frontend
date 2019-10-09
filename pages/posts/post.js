@@ -22,7 +22,7 @@ class Index extends React.Component {
 
     var url = new URL(window.location.href);
     var id = url.searchParams.get("id");
-  
+
     axios.get('https://localhost:8080/cats/').then(e=>{
 
       this.setState({categories:e.data})
@@ -84,40 +84,40 @@ class Index extends React.Component {
     return (
       <Layout>
 
-      <div class="container">
+      <div className="container">
       <form onSubmit={this.handleSubmit}>
       {this.state.post._id && <input type="hidden" name="id" value={this.state.post._id}/>}
-      <div class="form-group">
+      <div className="form-group">
         <label for="title">title</label>
-        <input onChange={this.handleChange} type="text" name="title" value={this.state.post.title} class="form-control" id="title" placeholder="title" />
+        <input onChange={this.handleChange} type="text" name="title" value={this.state.post.title} className="form-control" id="title" placeholder="title" />
       </div>
 
-      <div class="form-group">
+      <div className="form-group">
         <label for="name">text*</label>
         <textarea onChange={this.handleChange} required type="text"
-        name="text" value={this.state.post.text} class="form-control" id="name" placeholder="text" />
+        name="text" value={this.state.post.text} className="form-control" id="name" placeholder="text" />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="link">link*</label>
-        <input onChange={this.handleChange} required type="text" name="link" value={this.state.post.link} class="form-control" id="link" placeholder="link" />
+        <input onChange={this.handleChange} required type="text" name="link" value={this.state.post.link} className="form-control" id="link" placeholder="link" />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="assignees">assignees</label>
-        <input onChange={this.handleChange} required type="text" name="assignees" value={this.state.post.assignees} class="form-control" id="assignees" placeholder="assignees" />
+        <input onChange={this.handleChange} type="text" name="assignees" value={this.state.post.assignees} className="form-control" id="assignees" placeholder="assignees" />
       </div>
-  <div class="form-group">
+  <div className="form-group">
     <label for="notes">notes</label>
-    <textarea onChange={this.handleChange} required type="text"
-    name="notes" value={this.state.post.notes} class="form-control" id="notes" placeholder="Notes" />
+    <textarea onChange={this.handleChange} type="text"
+    name="notes" value={this.state.post.notes} className="form-control" id="notes" placeholder="Notes" />
 </div>
-  <div class="form-group">
+  <div className="form-group">
     <label for="exampleFormControlSelect1">category</label>
-    <select onChange={this.handleChange} required name="category" value={this.state.post.category } class="form-control" id="exampleFormControlSelect1">
+    <select onChange={this.handleChange} required name="category" value={this.state.post.category } className="form-control" id="exampleFormControlSelect1">
     {cats.length && cats.map(cat=> <option  value={cat.name} className={`badge-${cat.color}`}>{cat.name}</option>) }
     </select>
   </div>
 
-  <div class="form-group float-right px-2">
+  <div className="form-group float-right px-2">
     <button type="submit" disabled={this.state.disabled} className="btn btn-lg btn-primary">save</button>
   </div>
 </form>

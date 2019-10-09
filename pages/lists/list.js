@@ -43,8 +43,6 @@ class Index extends React.Component {
         console.log(newPost)
         this.setState({post:newPost})
       }
-
-
     })
 
   }
@@ -54,21 +52,18 @@ class Index extends React.Component {
   }
   handleSubmit(e){
     const axios = require('../../utils/axios')
-
     e.preventDefault();
-
     var data = {};
-
     for(let input of e.target.elements){
       let name = input.getAttribute('name')
       let value = input.value
       if(name)
         data[name] = value
  }
- console.log(data)
+ // console.log(data)
  this.setState({disabled:true})
  axios.post('https://localhost:8080/lists/save',data).then(e=>{
-   console.log(e)
+   // console.log(e)
    alert("Word List saved successfully !")
    Router.push('/lists')
    this.setState({disabled:false})
@@ -79,7 +74,7 @@ class Index extends React.Component {
 
   }
   render(){
-    console.log(this.state.post)
+    // console.log(this.state.post)
     const cats = this.state.categories;
     return (
       <Layout>
