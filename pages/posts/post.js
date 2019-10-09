@@ -86,28 +86,28 @@ class Index extends React.Component {
 
       <div className="container">
       <form onSubmit={this.handleSubmit}>
-      {this.state.post._id && <input type="hidden" name="id" value={this.state.post._id}/>}
+      {this.state.post._id && <input dir="auto" type="hidden" name="id" value={this.state.post._id}/>}
       <div className="form-group">
         <label for="title">title</label>
-        <input onChange={this.handleChange} type="text" name="title" value={this.state.post.title} className="form-control" id="title" placeholder="title" />
+        <input dir="auto" onChange={this.handleChange} type="text" name="title" value={this.state.post.title} className="form-control" id="title" placeholder="title" />
       </div>
 
       <div className="form-group">
         <label for="name">text*</label>
-        <textarea onChange={this.handleChange} required type="text"
+        <textarea dir="auto" onChange={this.handleChange} required type="text"
         name="text" value={this.state.post.text} className="form-control" id="name" placeholder="text" />
       </div>
       <div className="form-group">
         <label for="link">link*</label>
-        <input onChange={this.handleChange} required type="text" name="link" value={this.state.post.link} className="form-control" id="link" placeholder="link" />
+        <input dir="auto" onChange={this.handleChange} required type="text" name="link" value={this.state.post.link} className="form-control" id="link" placeholder="link" />
       </div>
       <div className="form-group">
         <label for="assignees">assignees</label>
-        <input onChange={this.handleChange} type="text" name="assignees" value={this.state.post.assignees} className="form-control" id="assignees" placeholder="assignees" />
+        <input dir="auto" onChange={this.handleChange} type="text" name="assignees" value={this.state.post.assignees} className="form-control" id="assignees" placeholder="assignees" />
       </div>
   <div className="form-group">
     <label for="notes">notes</label>
-    <textarea onChange={this.handleChange} type="text"
+    <textarea dir="auto" onChange={this.handleChange} type="text"
     name="notes" value={this.state.post.notes} className="form-control" id="notes" placeholder="Notes" />
 </div>
   <div className="form-group">

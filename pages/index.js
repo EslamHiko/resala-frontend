@@ -51,9 +51,11 @@ class Index extends React.Component {
           return post;
         });
         const allPosts = [...this.state.posts,...posts];
-
+        if(this.state.next){
+          window.scrollTo(0,document.body.scrollHeight);
+        }
         this.setState({posts:allPosts,postsToShow:allPosts,next:res.data.next,loading:"No Posts"});
-        window.scrollTo(0,document.body.scrollHeight);
+
       }).catch(e=>{
         console.log(e)
       });

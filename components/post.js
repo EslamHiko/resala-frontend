@@ -57,7 +57,7 @@ export default class Post extends React.Component {
         </div>
         {(
         (this.props.user && this.props.user.role == 'admin') &&
-        <a href="#"  onClick={this.saveList} post={JSON.stringify(post)} className="btn btn-secondary  btn-sm">add as word list</a>
+        <a href="#"  onClick={this.saveList} post={JSON.stringify(post)} className="btn btn-secondary  btn-sm">Add As WordList</a>
       )}
       </div>
 

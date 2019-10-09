@@ -71,7 +71,7 @@ class Index extends React.Component {
       {this.state.cat._id && <input type="hidden" name="id" value={this.state.cat._id}/>}
   <div class="form-group">
     <label for="name">Name</label>
-    <input onChange={this.handleChange} required type="text" name="name" value={this.state.cat.name} class="form-control" id="name" placeholder="Category name" />
+    <input dir="auto" onChange={this.handleChange} required type="text" name="name" value={this.state.cat.name} class="form-control" id="name" placeholder="Category name" />
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Color</label>

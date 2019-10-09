@@ -85,7 +85,7 @@ class Index extends React.Component {
 
       <div class="form-group">
         <label for="name">text*</label>
-        <textarea onChange={this.handleChange} required type="text"
+        <textarea dir="auto" onChange={this.handleChange} required type="text"
         name="text" value={this.state.post.text} class="form-control" id="name" placeholder="text" />
       </div>
 

@@ -69,10 +69,10 @@ class Index extends React.Component {
                   <tbody>
                   {this.state.posts.map(post => <tr>
                     <td>{post.title}</td>
-                    <td>{post.text}</td>
+                    <td><pre>{post.text}</pre></td>
                     <td><a href="#" className={`badge badge-${getColor(post.category)}`}>{post.category}</a></td>
                     <td>{post.assignees}</td>
-                    <td>{post.notes}</td>
+                    <td><pre>{post.notes}</pre></td>
                     <td><Link href={'/posts/post?id='+post._id}  cat={post}><a className="btn btn-sm btn-warning">edit</a></Link>
                     <a className="btn btn-sm btn-danger" onClick={this.removePost} href="#" name={post.name} post={post._id}>remove</a>
                     <a className="btn btn-sm btn-primary" href={post.link} target="_blank" name={post.name} post={post._id}>go to post</a></td>

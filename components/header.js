@@ -6,10 +6,10 @@ const Header = (props) => (
 
   <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
     <Head>
-      <title>ClassifyIt</title>
+      <title>ClassifyIt (Out Of The Box Team :D)</title>
     </Head>
      <div className="container">
-       <Link href="/"><a className="navbar-brand">ClassifyIt</a></Link>
+       <Link href="/"><a className="navbar-brand">ClassifyIt (Out Of The Box Team)</a></Link>
        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
          <span className="navbar-toggler-icon"></span>
        </button>
