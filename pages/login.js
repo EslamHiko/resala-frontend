@@ -10,16 +10,29 @@ class Index extends React.Component {
   constructor(props){
     super(props)
     this.state = {user:{}}
-    this.login = this.login.bind(this)
-  }
-
-  login(){
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
 
   }
+
+
   handleChange(e){
     const user = this.state.user;
     user[e.target.name] = e.target.value;
     this.setState({user:user});
+  }
+  handleSubmit(e){
+    const axios = require('../utils/axios')
+
+    e.preventDefault();
+    axios.post('https://localhost:8080/login',{email:this.state.user.email,password:this.state.user.password}).then(e=>{
+      if(!e.data.success)
+        return alert("Wrong Credentials !")
+      else {
+        localStorage.setItem('token',e.data.token)
+        location.reload()
+      }
+    })
   }
   async componentDidMount(){
     const token = localStorage.getItem('token')
@@ -31,7 +44,7 @@ class Index extends React.Component {
     <Layout>
       <main role="main" className="container">
         <div className="container">
-            <form onSubmit={this.login}>
+            <form onSubmit={this.handleSubmit}>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email"onChange={this.handleChange} value={this.state.user.email} name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
