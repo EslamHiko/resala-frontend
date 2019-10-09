@@ -16,6 +16,10 @@ class Index extends React.Component {
     return Router.push(path);
   }
   componentDidMount(){
+    const token = localStorage.getItem('token')
+    if(!token){
+      return Router.push('/error','/');
+    }
     const axios = require('../utils/axios')
     axios.get("https://localhost:8080/cats").then(e=>{
       this.setState({cats:e.data});

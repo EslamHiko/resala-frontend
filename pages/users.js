@@ -7,28 +7,29 @@ class Index extends React.Component {
   constructor(props){
     super(props)
     this.navigate = this.navigate.bind(this);
-    this.removePost = this.removePost.bind(this);
-    this.state = {posts:[],cats:[]}
+    this.removeUser = this.removeUser.bind(this);
+    this.state = {users:[]}
   }
   navigate(e){
     const path = $(e.target).attr('path');
     return Router.push(path);
   }
   componentDidMount(){
+    const token = localStorage.getItem('token')
+    if(!token){
+      return Router.push('/error','/');
+    }
     const axios = require('../utils/axios')
-    axios.get('https://localhost:8080/cats/').then(e=>{
-      this.setState({cats:e.data})
-      axios.get("https://localhost:8080/lists").then(e=>{
-        this.setState({posts:e.data});
-      })
-    })
+    axios.get('https://localhost:8080/users/').then(e=>{
+      this.setState({users:e.data})
+    });
   }
-  removePost(e){
-    if (confirm('Are you sure you want to delete this post?')) {
+  removeUser(e){
+    if (confirm('Are you sure you want to delete this user ('+e.target.name+')?')) {
       const axios = require('../utils/axios')
-      axios.post("https://localhost:8080/lists/delete",{id:e.target.getAttribute('post')}).then(e=>{
+      axios.post("https://localhost:8080/users/delete",{id:e.target.getAttribute('user')}).then(e=>{
         if(e.data.success){
-          alert('list deleted successfully !')
+          alert('user deleted successfully !')
           location.reload();
         }
       });
@@ -46,7 +47,7 @@ class Index extends React.Component {
                   <h1 className="h2">Users</h1>
                   <div className="btn-toolbar mb-2 mb-md-0">
                     <div className="btn-group mr-2">
-                      <button type="button" onClick={this.navigate} path="/lists/list" className="btn btn-sm btn-outline-secondary">+ New User</button>
+                      <button type="button" onClick={this.navigate} path="/users/user" className="btn btn-sm btn-outline-secondary">+ New User</button>
                     </div>
                   </div>
               </div>
@@ -61,9 +62,10 @@ class Index extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.users.map(user => <tr>
-                  <td>{user.name}</td>
+                  <td>{user.profile.name}</td>
                   <td>{user.email}</td>
-                  <td><Link href={'/users/user?id='+post._id}  user={user}><a className="btn btn-sm btn-warning">edit</a></Link>
+                  <td>{user.role}</td>
+                  <td><Link href={'/users/user?id='+user._id}  user={user}><a className="btn btn-sm btn-warning">edit</a></Link>
                   <a className="btn btn-sm btn-danger" onClick={this.removeUser} href="#" name={user.name} user={user._id}>remove</a>
                   </td>
                 </tr>)}

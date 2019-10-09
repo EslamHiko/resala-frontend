@@ -19,11 +19,11 @@ const Header = (props) => (
              <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Manage <span className="caret"></span></a>
              <div className="dropdown-menu" aria-labelledby="download">
              {!props.user._id &&  <Link href="/login"><a className="dropdown-item">Login</a></Link>}
+             {props.user._id && props.user.sadmin && <Link  href="/users"><a className="dropdown-item">Users / Admins</a></Link>}
              {props.user._id && props.user.role == 'admin' &&
              [
               <Link  key={0} href="/categories"><a className="dropdown-item">Categories</a></Link>,
-              <Link  key={1} href="/users"><a className="dropdown-item">Admins</a></Link>,
-             <Link  key={2} href="/lists"><a className="dropdown-item">Word Lists</a></Link>,
+             <Link  key={1} href="/lists"><a className="dropdown-item">Word Lists</a></Link>,
              <Link  key={3} href="/posts"><a className="dropdown-item">Saved Posts</a></Link>
               ]}
               {props.user._id && <Link href="/logout"><a className="dropdown-item">Log out</a></Link>}

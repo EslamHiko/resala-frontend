@@ -18,7 +18,7 @@ class Index extends React.Component {
   }
   handleChange(e){
     const user = this.state.user;
-    post[e.target.name] = e.target.value;
+    user[e.target.name] = e.target.value;
     this.setState({user:user});
   }
   async componentDidMount(){
@@ -29,35 +29,23 @@ class Index extends React.Component {
   render(){
     return (
     <Layout>
+      <main role="main" className="container">
+        <div className="container">
+            <form onSubmit={this.login}>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email"onChange={this.handleChange} value={this.state.user.email} name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" onChange={this.handleChange} value={this.state.user.password} name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  />
+              </div>
 
-
-
-    <main role="main" className="container">
-
-          <div className="container">
-
-          <form onSubmit={this.login}>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email"onChange={this.handleChange} value={this.state.user.email} name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" onChange={this.handleChange} value={this.state.user.password} name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  />
-  </div>
-
-  <button type="submit" class="btn btn-primary">login</button>
-  <a href="https://localhost:8080/auth/facebook" class="btn btn-primary">Log in with Facebook</a>
-
-
-</form>
-      </div>
-        </main>
-
-
-
-
+              <button type="submit" class="btn btn-primary">login</button>
+              <a href="https://localhost:8080/auth/facebook" class="btn btn-primary">Log in with Facebook</a>
+            </form>
+        </div>
+      </main>
     </Layout>
   );}
 }

@@ -27,11 +27,12 @@ class Index extends React.Component {
     const axios = require('../utils/axios')
 
     await axios.get('https://localhost:8080/'+(this.state.next?'?next='+encodeURIComponent(this.state.next):'')).then(res=>{
+
         var posts = res.data.posts;
         posts = posts.map(post=>{
           console.log(post)
           const possibleBadges = [];
-          if(post.scores[0][Object.keys(post.scores[0])[0]]){
+          if(post.scores.length && Object.keys(post.scores[0]).length && post.scores[0][Object.keys(post.scores[0])[0]]){
             possibleBadges.push([Object.keys(post.scores[0])[0]]);
           } else {
             possibleBadges.push("غير معروف");
@@ -52,6 +53,7 @@ class Index extends React.Component {
         const allPosts = [...this.state.posts,...posts];
 
         this.setState({posts:allPosts,postsToShow:allPosts,next:res.data.next,loading:"No Posts"});
+        window.scrollTo(0,document.body.scrollHeight);
       }).catch(e=>{
         console.log(e)
       });
@@ -88,10 +90,10 @@ await axios.get('https://localhost:8080/cats').then(async res=>{
             </div>
             <div className="container">
             <div className="row margin-top">
-              {(this.state.postsToShow.length && this.state.postsToShow.map((post,i)=><Post key={i} post={post} user={this.state.user} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
+              {(this.state.postsToShow.length && this.state.postsToShow.map((post,i)=> post.message && <Post key={i} post={post} user={this.state.user} cats={this.state.cats} />)) || <div className="text-center">{this.state.loading}</div>}
             </div>
             <div className="text-center">
-              {(this.state.next && this.state.loading != 'Loading' && <a href="#" onClick={this.loadPosts} className="btn btn-md btn-success">Load More</a>)}
+              {(this.state.next && this.state.loading != 'Loading' && <a href="javascript:void(0)" onClick={this.loadPosts} className="btn btn-md btn-success">Load More</a>)}
             </div>
         </div>
       </main>
